@@ -1,6 +1,12 @@
 #!/bin/bash
 
+# Repositories
+sudo add-apt-repository -y ppa:nilarimogard/webupd8
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+sudo add-apt-repository 'deb [arch=amd64,i386] https://cran.rstudio.com/bin/linux/ubuntu xenial/'
+sudo apt-get update
 
+# Required packages
 sudo apt install -y \
     atom \
     alsa-tools \
@@ -31,8 +37,6 @@ sudo hda-verb /dev/snd/hwC0D2 0x20 SET_COEF_INDEX 0x67
 sudo hda-verb /dev/snd/hwC0D2 0x20 SET_PROC_COEF 0x3000
 
 # Install GDrive
-sudo add-apt-repository -y ppa:nilarimogard/webupd8
-sudo apt-get update
 apt install -y python-pyinotify expect libyajl-dev libboost-test-dev binutils-dev libboost-program-options-dev libboost-filesystem-dev libcurl4-openssl-dev libgcrypt11-dev libappindicator1
 wget http://ftp.uk.debian.org/debian/pool/main/j/json-c/libjson-c2_0.11-4_amd64.deb
 wget http://ftp.uk.debian.org/debian/pool/main/j/json-c/libjson0-dev_0.11-4_amd64.deb
@@ -54,4 +58,17 @@ sudo snap install pycharm-community --classic
 # Disable sleep on lid close
 sudo sed -i '' "s/#HandleLidSwitch=suspend/HandleLidSwitch=ignore/" /etc/systemd/logind.conf
 sudo systemctl restart systemd-logind
+
+# Install TomTom Connect 
+wget http://launchpadlibrarian.net/215074266/libgstreamer0.10-0_0.10.36-1.5ubuntu1_amd64.deb
+wget http://launchpadlibrarian.net/185267586/gstreamer0.10-plugins-base_0.10.36-2_amd64.deb
+wget http://launchpadlibrarian.net/185267581/libgstreamer-plugins-base0.10-0_0.10.36-2_amd64.deb
+wget https://sports.tomtom-static.com/downloads/desktop/mysportsconnect/latest/tomtomsportsconnect.x86_64.deb
+sudo dpkg -i libgstreamer0.10-0_0.10.36-1.5ubuntu1_amd64.deb
+sudo dpkg -i libgstreamer-plugins-base0.10-0_0.10.36-2_amd64.deb
+sudo dpkg -i gstreamer0.10-plugins-base_0.10.36-2_amd64.deb
+sudo dpkg -i tomtomsportsconnect.x86_64.deb
+
+
+# R Interpreter
 
