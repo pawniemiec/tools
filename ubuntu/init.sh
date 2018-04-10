@@ -2,7 +2,7 @@
 
 # Repositories
 sudo add-apt-repository -y ppa:nilarimogard/webupd8
-sudo add-apt-repository ppa:gezakovacs/ppa
+sudo add-apt-repository -y ppa:gezakovacs/ppa
 sudo apt-get update
 
 # Required packages
@@ -68,6 +68,8 @@ sudo dpkg -i libgstreamer-plugins-base0.10-0_0.10.36-2_amd64.deb
 sudo dpkg -i gstreamer0.10-plugins-base_0.10.36-2_amd64.deb
 sudo dpkg -i tomtomsportsconnect.x86_64.deb
 
-
-# R Interpreter
+# Backup
+wget https://updates.duplicati.com/beta/duplicati_2.0.3.3-1_all.deb
+sudo dpkg -i duplicati_2.0.3.3-1_all.deb
+sudo apt --fix-broken install
 
