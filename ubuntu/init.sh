@@ -2,15 +2,14 @@
 
 # Repositories
 sudo add-apt-repository -y ppa:nilarimogard/webupd8
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
-sudo add-apt-repository 'deb [arch=amd64,i386] https://cran.rstudio.com/bin/linux/ubuntu xenial/'
+sudo add-apt-repository ppa:gezakovacs/ppa
 sudo apt-get update
 
 # Required packages
 sudo apt install -y \
     atom \
     alsa-tools \
-    net-tools jq fuse-exfat exfat-utils bluez-tools tilix \
+    net-tools nmap jq fuse-exfat exfat-utils bluez-tools tilix ncdu unetbootin \
     budgie-desktop budgie-screenshot-applet budgie-haste-applet budgie-weather-applet \
     budgie-indicator-applet \
     lightdm nvidia-390 touchegg compizconfig-settings-manager gnome-tweak-tool \
@@ -20,7 +19,7 @@ sudo apt install -y \
     fakeroot icoutils innoextract \
     docker docker-compose \
     terraform graphviz aws-cli \
-    python-pip ruby \
+    python-pip ruby r-cran-littler \
     apt-transport-https ca-certificates curl software-properties-common \
     spotify-client \
     whois \
@@ -59,7 +58,7 @@ sudo snap install pycharm-community --classic
 sudo sed -i '' "s/#HandleLidSwitch=suspend/HandleLidSwitch=ignore/" /etc/systemd/logind.conf
 sudo systemctl restart systemd-logind
 
-# Install TomTom Connect 
+# Install TomTom Connect
 wget http://launchpadlibrarian.net/215074266/libgstreamer0.10-0_0.10.36-1.5ubuntu1_amd64.deb
 wget http://launchpadlibrarian.net/185267586/gstreamer0.10-plugins-base_0.10.36-2_amd64.deb
 wget http://launchpadlibrarian.net/185267581/libgstreamer-plugins-base0.10-0_0.10.36-2_amd64.deb
