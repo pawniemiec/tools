@@ -9,7 +9,7 @@ sudo apt-get update
 sudo apt install -y \
     atom \
     alsa-tools \
-    net-tools nmap jq fuse-exfat exfat-utils bluez-tools tilix ncdu unetbootin \
+    net-tools nmap jq fuse-exfat exfat-utils bluez-tools tilix ncdu unetbootin isyslinux-utils \
     budgie-desktop budgie-screenshot-applet budgie-haste-applet budgie-weather-applet \
     budgie-indicator-applet \
     lightdm nvidia-390 touchegg compizconfig-settings-manager gnome-tweak-tool \
