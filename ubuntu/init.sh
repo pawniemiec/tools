@@ -19,7 +19,7 @@ sudo apt install -y \
     fakeroot icoutils innoextract \
     docker docker-compose \
     terraform graphviz aws-cli \
-    python-pip ruby r-cran-littler \
+    python-pip ipython ruby r-cran-littler \
     apt-transport-https ca-certificates curl software-properties-common \
     spotify-client \
     whois \
@@ -72,4 +72,13 @@ sudo dpkg -i tomtomsportsconnect.x86_64.deb
 wget https://updates.duplicati.com/beta/duplicati_2.0.3.3-1_all.deb
 sudo dpkg -i duplicati_2.0.3.3-1_all.deb
 sudo apt --fix-broken install
+
+# Remarkable Markdown editor
+wget https://remarkableapp.github.io/files/remarkable_1.87_all.deb
+sudo dpkg -i remarkable_1.87_all.deb
+sudo apt --fix-broken install
+
+# pip install some packages
+pip install IPython
+pip install py-rest-client
 
