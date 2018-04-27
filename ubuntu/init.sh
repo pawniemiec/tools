@@ -19,7 +19,7 @@ sudo apt install -y \
     fakeroot icoutils innoextract \
     docker docker-compose \
     terraform graphviz aws-cli \
-    python-pip ipython ruby r-cran-littler \
+    openjdk-8-jdk-headless python-pip ipython ruby r-cran-littler \
     apt-transport-https ca-certificates curl software-properties-common \
     spotify-client \
     whois \
