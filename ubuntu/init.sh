@@ -8,17 +8,16 @@ sudo apt-get update
 # Required packages
 sudo apt install -y \
     atom \
-    alsa-tools \
+    alsa-tools steam \
     net-tools nmap jq fuse-exfat exfat-utils bluez-tools tilix ncdu unetbootin isyslinux-utils \
     budgie-desktop budgie-screenshot-applet budgie-haste-applet budgie-weather-applet \
     budgie-indicator-applet \
     lightdm nvidia-390 touchegg compizconfig-settings-manager gnome-tweak-tool \
     virtualbox libqt5opengl5 libqt5opengl5-gles libqt5printsupport5 libqt5x11extras5 libsdl1.2debian \
     klavaro \
-    steam \
     fakeroot icoutils innoextract \
     docker docker-compose \
-    terraform graphviz aws-cli \
+    terraform graphviz packer \
     openjdk-8-jdk-headless python-pip ipython ruby r-cran-littler \
     apt-transport-https ca-certificates curl software-properties-common \
     spotify-client \
@@ -81,4 +80,6 @@ sudo apt --fix-broken install
 # pip install some packages
 pip install IPython
 pip install py-rest-client
+pip install awscli --upgrade --user
 
+aws s3 cp s3://$(curl 169.254.169.254/latest/user-data)/rsyslog.conf /etc/rsyslog.conf --region eu-west-2
