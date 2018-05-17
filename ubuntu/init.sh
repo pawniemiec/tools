@@ -3,6 +3,7 @@
 # Repositories
 sudo add-apt-repository -y ppa:nilarimogard/webupd8
 sudo add-apt-repository -y ppa:gezakovacs/ppa
+sudo apt-add-repository -y ppa:ansible/ansible
 sudo apt-get update
 
 # Required packages
@@ -17,13 +18,13 @@ sudo apt install -y \
     klavaro \
     fakeroot icoutils innoextract \
     docker docker-compose \
-    terraform graphviz packer \
+    terraform graphviz packer ansible \
     openjdk-8-jdk-headless python-pip ipython ruby r-cran-littler \
     apt-transport-https ca-certificates curl software-properties-common \
     spotify-client \
     whois \
     ecryptfs-utils cryptsetup \
-    network-manager-openvpn network-manager-openvpn-gnome
+    network-manager-openvpn network-manager-openvpn-gnome haproxy
 
 # Fix mouse pointer issue
 sudo ubuntu-drivers autoinstall
@@ -82,4 +83,17 @@ pip install IPython
 pip install py-rest-client
 pip install awscli --upgrade --user
 
-aws s3 cp s3://$(curl 169.254.169.254/latest/user-data)/rsyslog.conf /etc/rsyslog.conf --region eu-west-2
+# configure haproxy
+sudo bash -c "cat >> /etc/haproxy/haproxy.cfg" << EOL
+
+backend bkp
+    server bkp 127.0.0.1:8200
+
+frontend lh
+    bind *:80
+    use_backend bkp if { hdr(Host) -i duplicati }
+    use_backend bkp if { hdr(Host) -i bkp }
+EOL
+
+echo "127.0.0.1 duplicati bkp" | sudo tee -a /etc/hosts
+
