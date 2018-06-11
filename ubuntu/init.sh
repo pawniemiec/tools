@@ -97,3 +97,15 @@ EOL
 
 echo "127.0.0.1 duplicati bkp" | sudo tee -a /etc/hosts
 
+# Install kubernetes
+sudo snap install kubectl --classic
+
+# Install minikube
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.27.0/minikube-linux-amd64
+chmod +x minikube
+sudo mv minikube /usr/local/bin/
+
+# Initialize minikube
+minikube start
+minikube stop
+
