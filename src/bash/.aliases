@@ -6,6 +6,7 @@ alias lt='ls -ltra --color=auto'
 alias l='ls -1a --color=auto'
 alias c='clear'
 alias tailf='tail -f'
+alias open='xdg-open &>/dev/null'
 alias tree='tree -shp --filelimit 100 '
 alias nst='sudo netstat -an | grep LISTEN | grep'
 alias myip='/usr/bin/curl v4.ifconfig.co/ip'
@@ -13,10 +14,15 @@ alias myip6='/usr/bin/curl v6.ifconfig.co/ip'
 alias brc='. ~/.bashrc'
 alias vbrc='vim ~/.bashrc && . ~/.bashrc'
 alias va='vim ~/.aliases && . ~/.bashrc'
-alias fn='find . -name':
-alias rmpyc='find . -name "*.pyc" -delete'
+alias fn='find . -name'
 alias pack='packer build -only=amazon-ebs -on-error=ask'
 alias ps_aux='ps aux| grep -v grep | grep'
+alias cam_off='sudo modprobe -r uvcvideo'
+alias cam_on='sudo modprobe -a uvcvideo'
+alias audio_on='nohup sox -t alsa default ~/Downloads/AronChupa-Rave-In-The-Grave.wav &'
+alias audio_off="kill $(ps aux |grep -v grep |grep sox |awk '{print $2}')"
+alias audio_hdmi='pactl set-card-profile 0 output:hdmi-stereo'
+alias audio_analog='pactl set-card-profile 0 output:analog-stereo'
 alias vch='netstat -nr inet | egrep -v "lo0|en0"; ps aux | grep openvpn | egrep -v "grep|sudo"'
 sum_file_lines() { cat $1 | awk '{ SUM += $0} END { print SUM }'; }
 
@@ -68,6 +74,13 @@ parse_git_branch() { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/
 aws_vault() { if [ -n "$AWS_VAULT" ]; then echo "($AWS_VAULT) "; fi; }
 export PS1="\[`[ $? = 0 ] && X=2 || X=1; tput setaf $X`\]\[\033[34m\]\$(aws_vault)\[\033[32m\]\u@\t\[`tput sgr0`\]:\w/\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
 
+# Networking
+alias wind_c='sudo windscribe connect curie'
+alias wind_uk='sudo windscribe connect Tea'
+alias wind_d='sudo windscribe disconnect && /usr/bin/curl v4.ifconfig.co/ip'
+alias rdel='sudo route delete '
+alias rdelall='for r in $(netstat -rn |egrep "utun1|utun2" |awk "{print $1}"); do sudo route delete $r; done'
+
 # make aliases
 alias mb='make build'
 alias mr='make run'
@@ -75,7 +88,6 @@ alias mt='make test'
 alias ms='make start'
 alias ml='make logs'
 alias mp='make stop'
-alias mkae='make'
 
 # env
 exenv () {
@@ -103,7 +115,6 @@ dkr () { docker kill $1 && docker rm $1; }
 dri () { docker rmi -f $1 >/dev/null; }
 dsh () { docker exec -i -t $1 /usr/bin/env sh -l; }
 dbash () { docker exec -i -t $1 /usr/bin/env bash -l; }
-dr_clear() { rm -rf /data/dcr/docker/registry/v2/repositories/$1; }
 d_c() {
     docker rm -v `docker ps --filter status=exited -q 2>/dev/null` 2>/dev/null
     docker rmi `docker images --filter dangling=true -q 2>/dev/null` 2>/dev/null
@@ -136,10 +147,18 @@ gpg_encrypt() { echo "$1" | gpg --encrypt --sign --armor -r pniemiec@noledgetech
 # Set python environment
 export PYTHONSTARTUP=~/.pythonstartup
 alias vpst='vim ~/.pythonstartup'
+alias python=python3
+alias pip=pip3
+alias pep='pep8 *.py'
 
+# SSH agent
 add-ssh () {
     if [ -z "$SSH_AUTH_SOCK" ] ; then
         eval $(ssh-agent -s)
         ssh-add
     fi
 }
+
+# Touchpad
+alias tpoff='xinput set-prop 15 "Device Enabled" 0'
+alias tpon='xinput set-prop 15 "Device Enabled" 1'
