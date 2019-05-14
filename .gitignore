@@ -6,11 +6,16 @@
 .env*
 data
 
-# ---------------------------------------------------------------------
-# Languages
-# ---------------------------------------------------------------------
-# Github provide a decent set of default .gitignore templates, the
-# following are copied from there: https://github.com/github/gitignore/
+#-----------------------------------------------------------
+# Vagrant
+#-----------------------------------------------------------
+**/acceptance_config.yml
+**/boxes/*
+**/.vagrant
+**/website/.vagrant
+**/website/build
+**/vagrant-spec.config.rb
+**/test/vagrant-spec/.vagrant/
 
 # ---------------------------------------------------------------------
 # terraform
@@ -23,6 +28,13 @@ data
 
 # .tfvars files
 *.tfvars
+
+
+# ---------------------------------------------------------------------
+# Languages
+# ---------------------------------------------------------------------
+# Github provide a decent set of default .gitignore templates, the
+# following are copied from there: https://github.com/github/gitignore/
 
 # ----------------------------------------------------------
 # Go
