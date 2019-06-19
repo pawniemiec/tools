@@ -8,7 +8,7 @@ source ~/.aliases
 for alias in $(ls -1 ~/.aliases_*); do source "${alias}"; done
 
 # Auto completion
-if [ $(which kubectl) ]; then source <(kubectl completion bash); echo "Auto-completion for kubectl configured"; fi
+if [ $(which kubectl) ]; then source <(kubectl completion bash); fi
 complete -C /usr/local/bin/terraform terraform
 complete -C '/usr/local/aws/bin/aws_completer' aws
 

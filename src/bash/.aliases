@@ -23,6 +23,8 @@ alias audio_on='nohup sox -t alsa default ~/Downloads/AronChupa-Rave-In-The-Grav
 alias audio_off="kill $(ps aux |grep -v grep |grep sox |awk '{print $2}')"
 alias audio_hdmi='pactl set-card-profile 0 output:hdmi-stereo'
 alias audio_analog='pactl set-card-profile 0 output:analog-stereo'
+alias winon='VBoxManage startvm Win10'
+alias winoff='VBoxManage controlvm Win10 poweroff'
 alias vch='netstat -nr inet | egrep -v "lo0|en0"; ps aux | grep openvpn | egrep -v "grep|sudo"'
 sum_file_lines() { cat $1 | awk '{ SUM += $0} END { print SUM }'; }
 
@@ -65,19 +67,19 @@ alias gcm='git commit -S -m'
 alias gcma='git commit -S --amend -m'
 alias gcman='git commit --amend --no-edit'
 alias gco='git checkout'
-alias gpo='git secrets && git push origin'
+alias gpo='git secrets --scan && git push origin'
 alias git_default_branch='git remote show origin | grep "HEAD branch" | cut -d ":" -f 2'
 alias gitlab_vars='GITLAB_TOKEN=eEjSBtCHrLYcvUGcPJdJ && GITLAB_URL=gitlab.digital.homeoffice.gov.uk'
 
 # Set prompt command
 parse_git_branch() { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'; }
 aws_vault() { if [ -n "$AWS_VAULT" ]; then echo "($AWS_VAULT) "; fi; }
-export PS1="\[`[ $? = 0 ] && X=2 || X=1; tput setaf $X`\]\[\033[34m\]\$(aws_vault)\[\033[32m\]\u@\t\[`tput sgr0`\]:\w/\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
+export PS1="\[`[ $? = 0 ] && X=2 || X=1; tput setaf $X`\]\[\033[34m\]\$(aws_vault)\[\033[32m\]\u@\t\[`tput sgr0`\]: \w/\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
 
 # Networking
-alias wind_c='sudo windscribe connect curie'
-alias wind_uk='sudo windscribe connect Tea'
-alias wind_d='sudo windscribe disconnect && /usr/bin/curl v4.ifconfig.co/ip'
+alias wpl='sudo windscribe connect curie'
+alias wuk='sudo windscribe connect Tea'
+alias wd='sudo windscribe disconnect && /usr/bin/curl v4.ifconfig.co/ip'
 alias rdel='sudo route delete '
 alias rdelall='for r in $(netstat -rn |egrep "utun1|utun2" |awk "{print $1}"); do sudo route delete $r; done'
 
