@@ -30,3 +30,9 @@ export GOPATH=$HOME/m/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 export GOOS=linux
+
+# Fix docker shtuff
+if [ "${USER}" != root ]; then
+    sudo chown ${USER} /var/run/docker.sock
+fi
+
