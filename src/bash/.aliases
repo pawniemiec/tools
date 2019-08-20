@@ -14,6 +14,7 @@ alias myip6='/usr/bin/curl v6.ifconfig.co/ip'
 alias brc='. ~/.bashrc'
 alias vbrc='vim ~/.bashrc && . ~/.bashrc'
 alias va='vim ~/.aliases && . ~/.bashrc'
+alias vsco='vim ~/.ssh/config && . ~/.bashrc'
 alias fn='find . -name'
 alias pack='packer build -only=amazon-ebs -on-error=ask'
 alias ps_aux='ps aux| grep -v grep | grep'
@@ -24,8 +25,9 @@ alias audio_off="kill $(ps aux |grep -v grep |grep sox |awk '{print $2}')"
 alias audio_hdmi='pactl set-card-profile 0 output:hdmi-stereo'
 alias audio_analog='pactl set-card-profile 0 output:analog-stereo'
 alias winon='VBoxManage startvm Win10'
-alias winoff='VBoxManage controlvm Win10 poweroff'
+alias winoff='VBoxManage controlvm Win10 savestate'
 alias vch='netstat -nr inet | egrep -v "lo0|en0"; ps aux | grep openvpn | egrep -v "grep|sudo"'
+alias vpl='vpn ~/Downloads/vpn-acp-platform.ovpn'
 sum_file_lines() { cat $1 | awk '{ SUM += $0} END { print SUM }'; }
 
 e () { echo -n "$1" | base64;}
@@ -54,7 +56,7 @@ configure_git() {
 }
 alias gc='git clone'
 alias gb='git branch'
-alias gs='git status'
+alias gs='git status --ignored'
 alias gd='git diff'
 alias gr='git rebase'
 alias gp='git pull'
@@ -160,6 +162,23 @@ add-ssh () {
         ssh-add
     fi
 }
+
+# Terrafrom/terragrunt
+alias tf='terraform'
+alias tfi='terraform init'
+alias tfp='terraform plan'
+alias tfa='terraform apply'
+alias tfaa='terraform apply -auto-approve'
+alias tfd='terraform destroy'
+alias tfda='terraform destroy -auto-approve'
+alias tg='terragrunt'
+alias tgi='terragrunt init'
+alias tgp='terragrunt plan'
+alias tga='terragrunt apply'
+alias tgaa='terragrunt apply -auto-approve'
+alias tgd='terragrunt destroy'
+alias tgda='terragrunt destroy -auto-approve'
+
 
 # Touchpad
 alias tpoff='xinput set-prop 15 "Device Enabled" 0'
