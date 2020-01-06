@@ -1,16 +1,18 @@
 # Standard
-alias ls='ls --color=auto'
-alias ll='ls -la --color=auto'
-alias l1='ls -1 --color=auto'
-alias lt='ls -ltra --color=auto'
-alias l='ls -1a --color=auto'
+alias ls='ls'
+alias ll='ls -la -G'
+alias l1='ls -1 -G'
+alias lt='ls -ltra -G'
+alias l='ls -1a -G'
 alias c='clear'
 alias tailf='tail -f'
-alias open='xdg-open &>/dev/null'
+#alias open='xdg-open &>/dev/null'
+alias soff='sudo pmset -a disablesleep 1'
+alias son='sudo pmset -a disablesleep 0'
 alias tree='tree -shp --filelimit 100 '
 alias nst='sudo netstat -an | grep LISTEN | grep'
-alias myip='/usr/bin/curl v4.ifconfig.co/ip'
-alias myip6='/usr/bin/curl v6.ifconfig.co/ip'
+alias myip='/usr/bin/curl https://api4.my-ip.io/ip && echo'
+alias myip6='/usr/bin/curl https://api6.my-ip.io/ip && echo'
 alias brc='. ~/.bashrc'
 alias vbrc='vim ~/.bashrc && . ~/.bashrc'
 alias va='vim ~/.aliases && . ~/.bashrc'
@@ -24,14 +26,38 @@ alias audio_on='nohup sox -t alsa default ~/Downloads/AronChupa-Rave-In-The-Grav
 alias audio_off="kill $(ps aux |grep -v grep |grep sox |awk '{print $2}')"
 alias audio_hdmi='pactl set-card-profile 0 output:hdmi-stereo'
 alias audio_analog='pactl set-card-profile 0 output:analog-stereo'
+alias watch='watch '
 alias winon='VBoxManage startvm Win10'
 alias winoff='VBoxManage controlvm Win10 savestate'
-alias vch='netstat -nr inet | egrep -v "lo0|en0"; ps aux | grep openvpn | egrep -v "grep|sudo"'
-alias vpl='vpn ~/Downloads/vpn-acp-platform.ovpn'
+alias cleardsstore='find . -name .DS_Store -type f -exec rm -f {} \;'
+alias pyspark='docker run -it -v $(pwd):/home/jovyan/work -p 8888:8888 jupyter/pyspark-notebook'
+
+restart_vpn() {
+  for p in $(ps aux | grep Tunnel | grep -v grep | awk '{print $2}')
+  do
+    sudo kill $p
+  done
+  ~/start_Tunnelblick
+}
+
 sum_file_lines() { cat $1 | awk '{ SUM += $0} END { print SUM }'; }
 
-e () { echo -n "$1" | base64;}
-d () { echo -n "$1" | base64 --decode; echo; }
+# Networking
+alias vch='netstat -nr inet | egrep -v "lo0|en0"; ps aux | grep openvpn | egrep -v "grep|sudo"'
+alias vpnstart='nohup sudo /Applications/Tunnelblick.app/Contents/MacOS/Tunnelblick >/dev/null 2>&1 &'
+vpnkill() { for pid in $(ps aux | grep -v grep | grep -i tunnelblick | awk '{print $2}'); do sudo kill -9 $pid; done; }
+dnsset() { networksetup -setdnsservers Wi-Fi 8.8.8.8 8.8.4.4; networksetup -getdnsservers Wi-Fi; }
+dnsclear() { networksetup -setdnsservers Wi-Fi Empty; networksetup -getdnsservers Wi-Fi; }
+
+# Black box
+alias bdf='blackbox_decrypt_file'
+alias bdaf='blackbox_decrypt_all_files'
+alias baf='blackbox_register_new_file'
+
+
+e () { echo -n "$1" | base64 -i -;}
+d () { echo -n "$1" | base64 --decode -; echo; }
+
 grp () {
     grep -RiIns $1 * .[^.]*;
 }
@@ -72,11 +98,14 @@ alias gco='git checkout'
 alias gpo='git secrets --scan && git push origin'
 alias git_default_branch='git remote show origin | grep "HEAD branch" | cut -d ":" -f 2'
 alias gitlab_vars='GITLAB_TOKEN=eEjSBtCHrLYcvUGcPJdJ && GITLAB_URL=gitlab.digital.homeoffice.gov.uk'
+gnb() { git checkout -b $1 && git push origin $1 && git branch --set-upstream-to=origin/$1 $1; }
+gbsu() { git branch --set-upstream-to=origin/feature/$1 $1; }
+
 
 # Set prompt command
 parse_git_branch() { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'; }
 aws_vault() { if [ -n "$AWS_VAULT" ]; then echo "($AWS_VAULT) "; fi; }
-export PS1="\[`[ $? = 0 ] && X=2 || X=1; tput setaf $X`\]\[\033[34m\]\$(aws_vault)\[\033[32m\]\u@\t\[`tput sgr0`\]: \w/\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
+export PS1="\[`[ $? = 0 ] && X=2 || X=1; tput setaf $X`\]\[\033[34m\]\$(aws_vault)\[\033[32m\]\u@\t\[`tput sgr0`\]: \w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
 
 # Networking
 alias wpl='sudo windscribe connect curie'
@@ -127,6 +156,7 @@ d_c() {
 
 # Docker-compose aliases
 alias dco='docker-compose'
+alias dcl='docker-compose logs'
 alias dcps='docker-compose ps'
 alias dcrm='docker-compose rm -f'
 alias dcb='docker-compose build'

@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Set PATH
-export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.local/bin:/Users/useradmin/git/fdp/2_temp/msk-proxy-test/kafka/bin:/Users/useradmin/git/fdp/2_temp/msk-proxy-test/confluent/bin
+
 
 # Aliases
 source ~/.aliases
@@ -31,8 +32,24 @@ export GOBIN=$GOPATH/bin
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 export GOOS=linux
 
+# Set Python
+export PYSPARK_PYTHON=python3.7
+export PYSPARK_DRIVER_PYTHON=ipython3
+
 # Fix docker shtuff
 if [ "${USER}" != root ]; then
     sudo chown ${USER} /var/run/docker.sock
+fi
+
+# Fix GPG
+if [ -z "${GPG_TTY}" ]; then
+    export GPG_TTY=$(tty)
+fi
+
+# Fix MacOS shtuff
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo "Applying MacOS fixes"
+    defaults write com.googlecode.iterm2 SlowPasteBytesPerCall -int 128
+    defaults write com.googlecode.iterm2 SlowPasteDelayBetweenCalls -float 0.001
 fi
 
