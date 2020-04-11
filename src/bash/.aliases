@@ -30,7 +30,7 @@ alias watch='watch '
 alias winon='VBoxManage startvm Win10'
 alias winoff='VBoxManage controlvm Win10 savestate'
 alias cleardsstore='find . -name .DS_Store -type f -exec rm -f {} \;'
-alias pyspark='docker run -it -v $(pwd):/home/jovyan/work -p 8888:8888 jupyter/pyspark-notebook'
+alias scalaspark='/usr/local/Cellar/apache-spark/2.4.5/bin/spark-shell -cp /Users/useradmin/git/fdp/fdp-infra/src/glue_scripts/spark-avro_2.11-2.4.3.jar'
 
 restart_vpn() {
   for p in $(ps aux | grep Tunnel | grep -v grep | awk '{print $2}')
@@ -213,3 +213,24 @@ alias tgda='terragrunt destroy -auto-approve'
 # Touchpad
 alias tpoff='xinput set-prop 15 "Device Enabled" 0'
 alias tpon='xinput set-prop 15 "Device Enabled" 1'
+
+
+# AWK
+function awk1() { awk '{print $1}'; }
+function awk2() { awk '{print $2}'; }
+function awk3() { awk '{print $3}'; }
+function awk4() { awk '{print $4}'; }
+function awk5() { awk '{print $5}'; }
+function awk6() { awk '{print $6}'; }
+function awk7() { awk '{print $7}'; }
+function awk8() { awk '{print $8}'; }
+function awk9() { awk '{print $9}'; }
+function awksum1() { awk '{ SUM += $1} END { print SUM }'; }
+function awksum2() { awk '{ SUM += $2} END { print SUM }'; }
+function awksum3() { awk '{ SUM += $3} END { print SUM }'; }
+function awksum4() { awk '{ SUM += $4} END { print SUM }'; }
+function awksum5() { awk '{ SUM += $5} END { print SUM }'; }
+function awksum6() { awk '{ SUM += $6} END { print SUM }'; }
+function awksum7() { awk '{ SUM += $7} END { print SUM }'; }
+function awksum8() { awk '{ SUM += $8} END { print SUM }'; }
+function awksum9() { awk '{ SUM += $9} END { print SUM }'; }

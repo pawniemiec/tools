@@ -28,7 +28,7 @@ shopt -s histappend histreedit histverify
 # Some Go lang shtuff
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/m/go
-export GOBIN=$GOPATH/bin
+#export GOBIN=$GOPATH/bin
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 export GOOS=linux
 
